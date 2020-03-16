@@ -1,0 +1,423 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>了不起的盖茨比</title>
+  <!--CSS层叠样式表 (Cascading Style Sheets)，定义HTML内容在浏览器内的显示样式，如文字大小、颜色、字体加粗等。-->
+  <!--
+常用的块状元素有如下，默认状态下，块状元素的宽度都为100%，可以通过如div{display:inline;}转为内联元素（和其它元素一行，高宽等设置不可改变）：
+<div>、<p>、<h1>...<h6>、<ol>、<ul>、<dl>、<table>、<address>、<blockquote> 、<form>
+常用的内联元素有如下,可以通过如a{display:block;}转为块级元素（独占一行，可设置高宽边距等）：
+<a>、<span>、<br>、<i>、<em>、<strong>、<label>、<q>、<var>、<cite>、<code>
+常用的内联块状元素有如下，内联块状元素具有其他两种的优点即和其它元素在同一行，高宽等设置可更改，可通过display：inline-block更改：
+<img>、<input>
+-->
+  <!--三种样式优先级：内联式 > 嵌入式 > 外部式。离被设置元素越近优先级别越高。标签的权值为1，类选择符的权值为10，ID选择符的权值最高为100。权值高的就使用哪种css样式-->
+  <!--层叠就是在html文件中对于同一个元素可以有多个css样式存在，当有相同权重的样式存在时，会根据这些css样式的前后顺序来决定，处于最后面的css样式会被应用。-->
+  <!--嵌入式CSS样式必须写在<style></style>之间，并且一般情况下嵌入式css样式写在<head></head>之间。如下-->
+  <style type="text/css">
+    /*css给表格加边框，css中注释使用此方式*/
+    /*","为分组选择符，可同时为多个标签设置同样样式*/
+    table tr td,
+    th {
+      border: 1px solid #111;
+    }
+
+    /*p、span为选择符，花括号内为声明，声明包含属性和对应的值*/
+    p {
+      font-size: 20px;
+      /*设置文字字号*/
+      color: red;
+      /*设置文字颜色*/
+      font-weight: bold;
+      /*设置字体加粗*/
+    }
+
+    /*最高权值使用！important，放于分号之前，如下*/
+    p {
+      color: olivedrab !important;
+    }
+
+    span {
+      color: blue;
+    }
+
+    /*类选择器*/
+    .one {
+      font-size: 30px;
+      ;
+    }
+
+    .two {
+      color: pink;
+    }
+
+    /*ID选择器:ID选择器只能在文档中使用一次*/
+    #setGreen {
+      color: green;
+    }
+
+    /*子选择器即“>”,用于选择指定标签元素的第一代子元素*/
+    .biaoti>li {
+      border: 1px solid red;
+    }
+
+    /*添加边框样式（粗细为1px， 颜色为红色的实线）*/
+    /*包含（后代）选择器即“ ”，用于选择“所有”后代元素*/
+    .biaoti_1 li {
+      border: 2px solid blue;
+    }
+
+    /*通用选择器即“*”,适用于所有标签元素*/
+    * {
+      font-size: 25px;
+    }
+
+    /*所有字体大小为25px*/
+    /*伪类选择符：允许给html不存在的标签（标签的某种状态）设置样式，比如给html中一个标签元素a的鼠标滑过的状态来设置字体颜色，如下*/
+    a:hover {
+      color: cornflowerblue;
+    }
+
+    /*设置字体格式、加粗、斜体、下划线、删除线*/
+    li {
+      font-family: "Microsotf Yahei";
+      font-weight: bold;
+      font-style: italic;
+      text-decoration: underline;
+      text-decoration: line-through;
+    }
+
+    /*设置段落排版：缩进、行间距、字/字母间距、单词间距*/
+    body {
+      text-indent: 2em;
+      /*2em表示2倍文字大小，即缩进两个字符*/
+      line-height: 1.5em;
+      letter-spacing: 10px;
+      word-spacing: 10px;
+    }
+
+    /*块状元素对齐：靠左/右，居中*/
+    table {
+      text-align: right;
+    }
+
+    /*盒子模型：内填充（盒子内容与边界的距离）padding-top/bottom/left/right，外边距margin（盒子与盒子的间距），边框border（border-style（边框样式）常见有：dashed（虚线）| dotted（点线）| solid（实线））*/
+    /*内容宽度width，元素实际宽度（盒子的宽度）=左边界+左边框+左填充+内容宽度+右填充+右边框+右边界*/
+    div {
+      border-right: 2px dotted red;
+      /*缩写，也可写成border-width:2px;border-style:dotted;border-color:red;*/
+      /*width:2000px;height:200px;*/
+      padding: 20px 10px 15px 30px;
+      /*上右下左顺时针方向；若上下填充一样为10px，左右一样为20px，可以这么写：padding:10px 20px；若left和right的值相同，如下面代码：padding:10px 20px 30px 20px;可缩写为：padding:10px 20px 30px;。margin同理*/
+    }
+
+    /*CSS布局模型：流动模型Flow；浮动模型Float；层模型Layer*/
+    /*流动模型：默认网页布局模式，1.块状元素都会在所处的包含元素内自上而下按顺序垂直延伸分布；2.内联元素都会在所处的包含元素内从左到右水平分布显示*/
+    /*浮动模型：可让块状元素同行显示，如下*/
+    /*#div1 {
+      float: left;
+    }*/
+
+    #div2 {
+      float: right;
+    }
+
+    /*层模型：精确定位元素，有绝对定位、相对定位、固定定位*/
+    /*绝对定位：position:absolute，将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块(如相对定位的块)进行绝对定位。如果不存在这样的包含块，则相对于body元素，即浏览器窗口。*/
+    #div3 {
+      position: absolute;
+      right: 100px;
+      top: 20px;
+    }
+
+    /*相对定位：position:relative，相对于初始位置移动，移动的方向和幅度由left、right、top、bottom属性确定，偏移前的位置保留不动，如相对于以前位置向下移动50px，向右移动100px为：*/
+    #div4 {
+      position: relative;
+      left: 200px;
+      top: 20px;
+    }
+
+    /*固定定位：position：fixed，相对于浏览器窗口保持固定，不受滚动条影响，即不管怎么滑动，该元素始终在当前窗口的某个位置*/
+    #fixed {
+      position: fixed;
+      bottom: 0;
+      /*这里设置为窗口右下角*/
+      right: 0;
+    }
+
+    /*绝对定位和相对定位结合使用*/
+    #box3 {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    #box4 {
+      font-style: normal;
+      font-size: 10px;
+      text-indent: 0%;
+      letter-spacing: normal;
+      line-height: normal;
+      width: 99%;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .div1 {
+      text-align: center;
+      /*内联元素设置将图片显示为水平居中*/
+    }
+
+    .div4 {
+      width: 200px;
+      /*定宽块状元素设置水平居中，定宽即宽度固定*/
+      margin: 20px auto;
+      /* margin-left 与 margin-right 设置为 auto */
+    }
+
+    /*三种不定宽块状元素方法*/
+    /*第一种：使用table标签，利用table标签的长度自适应性，即不定义其长度也不默认父元素body的长度（table其长度根据其内文本长度决定），可看做一个定宽块元素，然后再利用定宽块状居中的margin的方法，使其水平居中。*/
+    table {
+      margin: 0 auto;
+    }
+
+    /*第二种：更改为内联元素，改变块级元素的display为inline（设置为 行内元素 显示），然后使用text-align:center来实现居中效果。*/
+    .container {
+      text-align: center;
+    }
+    .container ul {
+      list-style: none;
+      margin: 0;
+      padding: 0; /* margin:0;padding:0（消除文本与div边框之间的间隙）*/
+      display: inline;
+    }
+    .container li {
+      margin-right: 8px; /* margin-right:8px（设置li文本之间的间隔）*/
+      display: inline;
+    }
+
+    /*第三种：通过给父元素设置float，然后给父元素设置position:relative和left:50%，子元素设置position:relative和left:-50%来实现水平居中。*/
+    .wrap_wrap{
+      float:left;
+      position:relative;
+      left:50%;
+    }
+    .wrap-center{
+      background:#ccc;
+      position:relative;
+	    left:-50%;
+    }
+
+    /*垂直居中：单行文本/多行文本*/
+    /*父元素高度确定的单行文本的竖直居中的方法是通过设置父元素的height和line-height高度一致来实现的。*/
+    .height_center_alone{
+      height:100px;
+      line-height:100px;
+      background:#999;
+    }
+    /*多行文本垂直居中法一：使用插入table (包括tbody、tr、td)标签，同时设置vertical-align：middle。css中有一个用于竖直居中的属性vertical-align，在父元素设置此样式时，会对inline-block类型的子元素都有用*/
+    .vertical_center{
+      height:500px;
+      background:#ccc
+    }
+
+    /*多行文本垂直居中法二：在chrome、firefox及IE8以上的浏览器下可以设置块级元素的display为table-cell（设置为表格单元显示），激活vertical-align属性，但IE6、7并不支持这个样式, 兼容性比较差。*/
+    .vertical_center_1{
+      height:300px;
+      background:#ccc;
+      display:table-cell;/*IE8以上及Chrome、Firefox*/
+      vertical-align:middle;/*IE8以上及Chrome、Firefox*/
+    }
+
+    /*隐性改变display属性*/
+    /*当为元素（不论之前是什么类型元素，display:none除外）设置以下内容时：
+    1. position : absolute 
+    2. float : left 或 float:right 
+    简单来说，只要html代码中出现以上两句之一，元素的display显示类型就会自动变为以display:inline-block（块状元素）的方式显示，就可以设置元素的width和height了，且默认宽度不占满父元素。*/
+  </style>
+  <!--外部式CSS：CSS代码写一个单独外部文件中，以.css为扩展名，在<head>内使用<link>标签将CSS样式文件链接到HTML文件内，如下-->
+  <link href="base.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="div3"><img width=‘150’ height='150' src="http://a0.att.hudong.com/78/52/01200000123847134434529793168.jpg">
+  </div>
+  <!--内联式CSS直接写在html内容中-->
+  <p id="div4" style="color:green;font-size:25px">这里文字是绿色。</p>
+  <!--类选择器测试,可以使用类选择器词列表方法为一个元素同时设置多个样式,ID选择器不可以-->
+  <p class="one two">动手编码,加油！加油！</p>
+  <!--ID选择器测试-->
+  <p class="div4">到了三年级下学期时，我们班上了一节<span id="setGreen">公开课</span></p>
+  <p>1922年的<span>春天</span>，一个想要成名名叫尼克•卡拉威（<a href="http://www.m1905.com/mdb/star/3316/" target="_blank">托比•马奎尔Tobey
+      Maguire </a>饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的美国梦，他搬入纽约附近一海湾居住。</p>
+  <p>菲茨杰拉德，二十世纪美国文学<span>巨擘</span>之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为"爵士乐时代"吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。</p>
+  <a href="mailto:yy@imooc.com?subject=" 观了不起的盖茨比有感&body="你好，对此评论有些想法" title="哈哈">对此影评有何感想，发送邮件给我</a><br>
+  <br>
+  <div id="div1" class="div1"><img src="http://img.mukewang.com/52da54ed0001ecfa04120172.jpg" title="电影介绍"></div>
+  <div id="div2">
+    <!--div划分区域-->
+    <h2>热门课程排行榜</h2>
+    <ol>
+      <li>前端开发面试心法 </li>
+      <li>零基础学习html</li>
+      <li>javascript全攻略</li>
+    </ol>
+  </div>
+  <div id="Learning Instructed">
+    <h2>web前端开发导学课程</h2>
+    <ul class="biaoti">
+      <!--测试子选择器与包含选择器，包含选择器改为“biaoti”-->
+      <li>网页专业名词大扫盲 </li>
+      <ul>
+        <li>测试子后代1</li>
+        <li>测试子后代2</li>
+      </ul>
+      <li>网站职位定位指南</li>
+      <li>为您解密Yahoo网站制作流程</li>
+    </ul>
+  </div>
+  <form method="post" action="save.php">
+    <!--form表单-->
+    <label for="username">用户名:</label>
+    <input type="text" name="username" id="username" />
+    <label for="pass">密码:</label>
+    <input type="password" name="pass" id="pass" value="" />
+    <input type="submit" value="确定" name="submit" />
+    <!--submit提交按钮-->
+    <input type="reset" value="重置" name="reset" />
+    <!--reset重置按钮，value即按钮显示的内容-->
+  </form>
+  <form method="post" action="save.php">
+    账户:
+    <input type="text" name="myName" />
+    <br>
+    密码:
+    <input type="password" name="pass" />
+  </form>
+  <!--table表格-->
+  <table summary="">
+    <tr>
+      <th>班级</th>
+      <th>学生数</th>
+      <th>平均成绩</th>
+    </tr>
+    <tr>
+      <td>一班</td>
+      <td>30</td>
+      <td>89</td>
+    </tr>
+    <tr>
+      <td>二班</td>
+      <td>35</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <td>三班</td>
+      <td>32</td>
+      <td>80</td>
+    </tr>
+  </table>
+
+  <!--不定宽块状元素水平居中法一：为需要设置的居中的元素外面加入table标签 (包括 <tbody>、<tr>、<td>)。-->
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <div class="wrap">设置我所在的div容器水平居中</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!--不定宽块状元素水平居中法二：更改为内联元素，然后使用text-align：center设置水平居中。-->
+  <div class="container">
+    <ul>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+    </ul>
+</div>
+
+  <!--textarea文本框/域，cols/rows即行/列数，可用css样式的width和height来代替-->
+  <textarea cols="50" rows="10">在这里输入内容...</textarea>
+  <!--raido/checkbox单选框/多选框-->
+  <form action="save.php" method="post">
+    <label>性别:</label>
+    <label for="male">男</label>
+    <!--label标签，for属性中的值应当与相关控件的id属性值一定要相同。-->
+    <input type="radio" value="1" name="gender" checked="checked" id="male" />
+    <!--checked即预先默认勾选了此项-->
+    <label for="female">女</label>
+    <input type="radio" value="2" name="gender" id="female" />
+    <!--name值相同才可同一类单选一个-->
+    <br>
+    <!--select-option下拉单选框，多选的话添加multiple属性，selected默认预先选择-->
+    <label>爱好:</label>
+    <select>
+      <!--多选即<select multiple="mutilple">-->>
+      <option value="看书">看书</option>
+      <option value="旅游" selected="selected">旅游</option>
+      <option value="运动">运动</option>
+      <option value="购物">购物</option>
+    </select>
+  </form>
+
+  <!--不定宽块状元素水平居中法三：设置position:relative和left:50%：利用相对定位的方式，将元素向左偏移50%，即达到居中的目的。-->
+<div class="wrap_wrap">
+  <div class="wrap-center">我们来学习一下这种方法。</div>
+</div>
+<br>
+
+<h5 class="height_center_alone">垂直居中测试哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</h5>
+
+<!--多行文本垂直居中法一测试-->
+<table><tbody><tr><td class="vertical_center">
+  <div>
+      <p>看我是否可以居中。</p>
+      <p>看我是否可以居中。</p>
+      <p>看我是否可以居中。</p>
+      <p>看我是否可以居中。</p>
+      <p>看我是否可以居中。</p>
+  </div>
+  </td></tr></tbody></table>
+
+  <!--多行文本垂直居中法二测试-->
+  <div class="vertical_center_1">
+    <p>我能垂直居中么？</p>
+    <p>我能垂直居中么？</p>
+    <p>我能垂直居中么？</p>
+  </div>
+
+  <!--固定定位测试-->
+  <img id="fixed" src="http://img.52z.com/upload/news/image/20200210/20200210084635_86986.jpg">
+  <!--absolute和relative结合使用测试-->
+  <div id="box3">
+    <img src="http://img.mukewang.com/541a7d8a00018cf102000200.jpg">
+    <div id="box4" :20px>当我还是三年级的学生时是一个害羞的小女生。</div>
+
+    <!--小技巧-->
+    <!--16进制的色彩值，如果每两位的值相同，可以缩写一半。如#000000可缩写为#000，#336699可缩写为#369。-->
+    <!--颜色也可用RGB表示，如rgb(133,45,200);rgb(20%,33%,25%);-->
+    <!--字体设置缩写：
+    font-style:italic;
+    font-variant:small-caps; 
+    font-weight:bold; 
+    font-size:12px; 
+    line-height:1.5em; 
+    font-family:"宋体",sans-serif;
+  上述可缩写为：
+    font:italic  small-caps  bold  12px/1.5em  "宋体",sans-serif;
+  注：至少要指定font-size和font-family，缩写时font-size与line-height中间要加入“/”。-->
+    <!--长度表示：px，em，百分比。
+    给 font-size 设置单位为 em 时，此时计算的标准以 p 的父元素的 font-size 为基础。如下代码：
+    html：<p>以这个<span>例子</span>为例。</p>
+    css:
+    p{font-size:14px}
+    span{font-size:0.8em;}
+    结果 span 中的字体“例子”字体大小就为11.2px（14*0.8=11.2px）。
+    百分比同理：p{font-size:12px;line-height:130%} 行高（行间距）为字体的130%（12 * 1.3 = 15.6px）-->
+</body>
+
+</html>
